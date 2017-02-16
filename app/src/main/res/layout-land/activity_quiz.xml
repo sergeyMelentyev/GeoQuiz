@@ -13,41 +13,34 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
         android:textAlignment="center"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <Button
-        android:id="@+id/cheat_button"
+        android:text="@string/cheat_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/cheat_button"/>
+        android:id="@+id/cheat_button"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
         android:layout_marginTop="15dp"
-        android:orientation="horizontal">
+        android:layout_marginBottom="15dp">
 
         <ImageButton
             android:id="@+id/previous_button"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:contentDescription="@string/prev_button"
-            app:srcCompat="@drawable/previous_24dp"/>
+            app:srcCompat="@drawable/previous_24dp"
+            android:contentDescription="@string/prev_button" />
 
         <ImageButton
             android:id="@+id/next_button"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:contentDescription="@string/next_question"
-            app:srcCompat="@drawable/next_24dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            app:srcCompat="@drawable/next_24dp"
+            android:contentDescription="@string/next_question" />
 
         <Button
             android:id="@+id/true_button"
@@ -60,5 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/false_button"/>
+
     </LinearLayout>
+
 </LinearLayout>

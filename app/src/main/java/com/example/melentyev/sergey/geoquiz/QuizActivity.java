@@ -1,5 +1,6 @@
 package com.example.melentyev.sergey.geoquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private static final String KEY_INDEX = "index";
 
+    private Button mCheatButton;
     private Button mTrueButton;
     private Button mFalseButton;
     private ImageButton mNextButton;
@@ -40,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
         mNextButton = (ImageButton) findViewById(R.id.next_button);
         mPrevButton = (ImageButton) findViewById(R.id.previous_button);
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
 
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
@@ -76,6 +79,15 @@ public class QuizActivity extends AppCompatActivity {
                     mCurrentIndex = mQuestionBank.length -1;
                 else --mCurrentIndex;
                 askNextQuestion();
+            }
+        });
+
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+                startActivity(intent);
             }
         });
     }
