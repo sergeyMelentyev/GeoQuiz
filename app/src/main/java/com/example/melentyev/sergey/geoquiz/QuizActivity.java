@@ -20,6 +20,8 @@ public class QuizActivity extends AppCompatActivity {
 
     private TextView mQuestionTextView;
     private int mCurrentIndex = 0;
+    private int mQuestionsAsked = 0;
+    private int mCorrectAnswers = 0;
     private Question[] mQuestionBank = new Question[] {
             new Question(R.string.question_australia, true),
             new Question(R.string.question_oceans, true),
@@ -85,14 +87,39 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void askNextQuestion() {
+        enableButtons(true);
+        if (mQuestionsAsked == mQuestionBank.length -1) {
+            gameOver();
+            mQuestionsAsked = 0;
+            mCorrectAnswers = 0;
+        }
+        ++mQuestionsAsked;
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
 
     private void isQuestionCorrect(boolean userPressedTrue) {
-        if (mQuestionBank[mCurrentIndex].isAnswerTrue() == userPressedTrue)
+        enableButtons(false);
+        if (mQuestionBank[mCurrentIndex].isAnswerTrue() == userPressedTrue) {
+            ++mCorrectAnswers;
             Toast.makeText(QuizActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
-        else
+        } else
             Toast.makeText(QuizActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+    }
+
+    private void enableButtons(boolean value) {
+        if (value) {
+            mTrueButton.setEnabled(true);
+            mFalseButton.setEnabled(true);
+        } else {
+            mTrueButton.setEnabled(false);
+            mFalseButton.setEnabled(false);
+        }
+    }
+
+    private void gameOver() {
+        Toast.makeText(this,
+                "Your rate is: " + (mCorrectAnswers * 100) / mQuestionsAsked + "%",
+                    Toast.LENGTH_SHORT).show();
     }
 }
